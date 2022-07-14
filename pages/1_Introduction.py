@@ -4,11 +4,11 @@ import numpy as np
 import pandas as pd
 
 st.set_page_config(page_title="About BAFA", page_icon=":football:",layout="wide")
-df = pd.read_csv('pages/Data/BAFA_2019_Full.csv',index_col=False)
-venues = pd.read_csv('pages/Data/BAFA_2019_Team_Venues.csv')
+df = pd.read_csv('pages/Data/BAFA_2019_complete.csv',index_col=False)
+
 
 df.rename(columns={'lat_d':'lat','lon_d':'lon'},inplace=True)
-venues.rename(columns={'Lat':'lat','Long':'lon'},inplace=True)
+
 
 st.markdown("# About BAFA")
 st.sidebar.header("BAFA Overview")
@@ -32,9 +32,9 @@ st.markdown(f"###### The League is made out of {(pd.unique(df['Division'])).size
 
 st.markdown("###### The map shows the teams location of each division. Each red dot marks the place where games are played in the selected disvision")
 divisions = tuple(pd.unique(df['Division']).tolist())
-option = st.multiselect('Choose Division to see its location:',divisions,divisions)
+with st.sidebar:
+    option = st.multiselect('Choose Division to see its location:',divisions)
 
-# st.markdown('###### Teams playing in Division: ' + option)
 bydivision = df[df.Division.isin([option])]
 byteams = bydivision.groupby('Home_Team').count()
 teams = [byteams.iloc[i].name for i in range(len(byteams))]
