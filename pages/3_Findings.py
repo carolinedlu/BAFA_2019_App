@@ -5,7 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 st.set_page_config(page_title="Findings", page_icon=':mag_right:',layout='wide')
-df = pd.read_csv('pages/Data/BAFA_2019_Complete.csv',index_col=False)
+df = pd.read_csv('pages/Data/BAFA_2019_complete.csv',index_col=False)
 
 newmaster = pd.read_csv('pages/Data/BAFA_By_team_2019.csv',index_col=False)
 
