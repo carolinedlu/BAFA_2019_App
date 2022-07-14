@@ -3,11 +3,31 @@ import pandas as pd
 import seaborn as sns
 import numpy as np
 import matplotlib.pyplot as plt
+@st.cache
+def da_thing(teams:list,dataframe):
+    topie = {}
+    tobarchart = {'Score_home':[],'Score_away':[],'Recieved_home':[],'Recieved_away':[]}
+    for team in team_s:
+        total_homepoints = sum(dataframe['Home_Score'][dataframe.Home_Team.str.contains(team)])
+        total_awaypoints = sum(dataframe['Away_Score'][dataframe.Away_Team.str.contains(team)])
+        tobarchart['Score_home'].append(total_homepoints)
+        tobarchart['Score_away'].append(total_awaypoints)
+        
+        total_homereceived = sum(dataframe['Away_Score'][dataframe.Home_Team.str.contains(team)])
+        total_awayreceived = sum(dataframe['Home_Score'][dataframe.Away_Team.str.contains(team)])
+        tobarchart['Recieved_home'].append(total_homereceived)
+        tobarchart['Recieved_away'].append(total_awayreceived)
+        topie[team] = [[total_homepoints,total_awaypoints],[total_homereceived,total_awayreceived]]
+    return topie,tobarchart
+
+
 
 st.set_page_config(page_title="Findings", page_icon=':mag_right:',layout='wide')
 df = pd.read_csv('pages/Data/BAFA_2019_complete.csv',index_col=False)
 
 newmaster = pd.read_csv('pages/Data/BAFA_By_team_2019.csv',index_col=False)
+
+
 
 F_General = st.container()
 F_Division = st.container()
@@ -30,37 +50,14 @@ with F_Division:
 
 
     by_division = df[df.Division == options1]
+    
 
-    
-    
-    
-    
-    
-    
     by_teams = by_division.groupby('Home_Team').count()
-
-
-
 
     team_s = [by_teams.iloc[i].name for i in range(len(by_teams))]
 
+    topie, barchar = da_thing(team_s,by_division)
 
-    scored_home = []
-    scored_away = []
-    received_home = []
-    received_away = []
-    topie = {}
-    for team in team_s:
-        total_homepoints = sum(by_division['Home_Score'][by_division.Home_Team.str.contains(team)])
-        total_awaypoints = sum(by_division['Away_Score'][by_division.Away_Team.str.contains(team)])
-        scored_home.append(total_homepoints)
-        scored_away.append(total_awaypoints)
-        
-        total_homereceived = sum(by_division['Away_Score'][by_division.Home_Team.str.contains(team)])
-        total_awayreceived = sum(by_division['Home_Score'][by_division.Away_Team.str.contains(team)])
-        received_home.append(total_homereceived)
-        received_away.append(total_awayreceived)
-        topie[team] = [[total_homepoints,total_awaypoints],[total_homereceived,total_awayreceived]]
 
     colc, cold,  = st.columns([2,2])
     with colc:
@@ -68,8 +65,8 @@ with F_Division:
 
         fig, ax = plt.subplots()
 
-        ax.barh(team_s, scored_home,width, label='Score @ Home',color='navy')
-        ax.barh(team_s, scored_away, width, left=scored_home,
+        ax.barh(team_s, barchar['Score_home'],width, label='Score @ Home',color='navy')
+        ax.barh(team_s, barchar['Score_away'], width, left=barchar['Score_home'],
             label='Score @ Away')
 
         ax.set_ylabel('Teams')
@@ -81,8 +78,8 @@ with F_Division:
 
         fig1, ax1 = plt.subplots()
 
-        ax1.barh(team_s, received_home,width, label='Received @ Home',color='navy')
-        ax1.barh(team_s, received_away, width, left=received_home,
+        ax1.barh(team_s, barchar['Recieved_home'],width, label='Received @ Home',color='navy')
+        ax1.barh(team_s, barchar['Recieved_away'], width, left=barchar['Recieved_home'],
             label='Received @ Away')
 
         ax1.set_ylabel('Teams')
@@ -90,6 +87,7 @@ with F_Division:
         ax1.legend()
         st.pyplot(fig1)
 
+ 
     
    
 
