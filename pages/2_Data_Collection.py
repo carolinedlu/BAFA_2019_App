@@ -20,10 +20,10 @@ with ab_data:
 
     col1,col2 = st.tabs(['Table 1','Table 2'])
     with col1:
-        st.markdown("#### The information about games is organized into a dataframe (table1)")
+        st.markdown("#### The information about games is organized into a dataframe.")
         st.table(df[['Game_Date','Game_Time','Home_Team','Away_Team','Home_Score','Away_Score','Division']].head(5))
     with col2:
-        st.markdown("#### The information about the venues is compiled into a dataframe (table2)")
+        st.markdown("#### The information about the venues is compiled into a dataframe.")
         st.table(venues[['Team_name','PostCode']].head(5))
     st.write(f'* These tables  only show a limited amount of the total rows.')
     st.markdown("##### The location where a game was played can be accessed by relating the Home_Team and the Team_name in both tables. Moreover, under the assumption that every team gathers in their home base before a game, information about where a team starts their journey when away can be accessed too.")
