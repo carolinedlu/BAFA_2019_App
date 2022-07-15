@@ -18,7 +18,7 @@ with ab_data:
     st.markdown("###### Information about the season can be found here: [BAFA](https://bafanle.leaguerepublic.com/index.html). The site provides date & time, home team, away team and the final score for each game in a division.")
     st.markdown("###### From here: [BAFA Venues](https://bafanle.leaguerepublic.com/venues.html) one can accces, by name, the adress where teams have registered the location for their home games.")
 
-    col1,col2 = st.columns([3,1])
+    col1,col2 = st.tabs(['Table 1','Table 2'])
     with col1:
         st.markdown("#### The information about games is organized into a dataframe (table1)")
         st.table(df[['Game_Date','Game_Time','Home_Team','Away_Team','Home_Score','Away_Score','Division']].head(5))
