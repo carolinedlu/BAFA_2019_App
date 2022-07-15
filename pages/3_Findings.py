@@ -28,12 +28,7 @@ df = pd.read_csv('pages/Data/BAFA_2019_complete.csv',index_col=False)
 newmaster = pd.read_csv('pages/Data/BAFA_By_team_2019.csv',index_col=False)
 
 
-
-F_General = st.container()
-F_Division = st.container()
-F_Team = st.container()
-F_Game = st.container()
-
+F_General, F_Division,F_Team,F_Game = st.tabs(['General Findings','Division','Team','Game'])
 
 
 
