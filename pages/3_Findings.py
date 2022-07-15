@@ -34,6 +34,10 @@ F_General, F_Division,F_Team,F_Game = st.tabs(['General Findings','Division','Te
 
 with F_General:
     st.subheader('General Findings')
+    fig0 = plt.figure()
+    sns.catplot(x="Score", y="Division", kind="boxen",
+            data=newmaster)
+    st.pyplot(fig0)
     
 
 
