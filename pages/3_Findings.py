@@ -29,7 +29,7 @@ with F_General:
     st.subheader('General Findings')
     fig0 = plt.figure()
     st.write(newmaster)
-    sns.countplot(x='Score',data=newmaster,hue='Cast_home')
+    sns.countplot(x='Score',data=newmaster)
 #     sns.catplot(x="Score", y="Division", kind="box", data=newmaster)
     st.pyplot(fig0)
     
