@@ -29,7 +29,8 @@ with F_General:
     st.subheader('General Findings')
     fig0 = plt.figure()
     st.write(newmaster)
-    sns.boxenplot(x="Score", y="Division", kind="boxen", data=newmaster)
+    sns.catplot(kind="boxen", data=newmaster)
+    #x="Score", y="Division", 
     st.pyplot(fig0)
     
 # with F_Division:
