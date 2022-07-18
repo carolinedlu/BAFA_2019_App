@@ -30,7 +30,7 @@ with F_General:
     fig0 = plt.figure()
     st.write(newmaster)
     sns.countplot(x='Score',data=newmaster)
-    sns.catplot(x="Score", y="Division", kind="boxen", data=df[df['Home_Team'].str.contains(option_team)])
+    sns.catplot(x="Score", y="Division", kind="boxen", data=df[df['Home_Team']])
 #     sns.catplot(x="Score", y="Division", kind="box", data=newmaster)
     st.pyplot(fig0)
     
