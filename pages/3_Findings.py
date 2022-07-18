@@ -29,7 +29,7 @@ with F_General:
     st.subheader('General Findings')
     fig0 = plt.figure()
     st.write(newmaster)
-    sns.catplot(kind="boxen", data=newmaster)
+    sns.catplot(kind="box", data=newmaster)
     #x="Score", y="Division", 
     st.pyplot(fig0)
     
