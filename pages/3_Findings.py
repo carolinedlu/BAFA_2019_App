@@ -4,21 +4,21 @@ import seaborn as sns
 import numpy as np
 import matplotlib.pyplot as plt
 
-@st.cache
-def da_thing(teams:list,dataframe):
-    topie = {}
-    tobarchart = {'Score_home':[],'Score_away':[],'Recieved_home':[],'Recieved_away':[]}
-    for team in team_s:
-        total_homepoints = sum(dataframe['Home_Score'][dataframe.Home_Team.str.contains(team)])
-        total_awaypoints = sum(dataframe['Away_Score'][dataframe.Away_Team.str.contains(team)])
-        tobarchart['Score_home'].append(total_homepoints)
-        tobarchart['Score_away'].append(total_awaypoints)
-        total_homereceived = sum(dataframe['Away_Score'][dataframe.Home_Team.str.contains(team)])
-        total_awayreceived = sum(dataframe['Home_Score'][dataframe.Away_Team.str.contains(team)])
-        tobarchart['Recieved_home'].append(total_homereceived)
-        tobarchart['Recieved_away'].append(total_awayreceived)
-        topie[team] = [[total_homepoints,total_awaypoints],[total_homereceived,total_awayreceived]]
-    return topie,tobarchart
+# @st.cache
+# def da_thing(teams:list,dataframe):
+#     topie = {}
+#     tobarchart = {'Score_home':[],'Score_away':[],'Recieved_home':[],'Recieved_away':[]}
+#     for team in team_s:
+#         total_homepoints = sum(dataframe['Home_Score'][dataframe.Home_Team.str.contains(team)])
+#         total_awaypoints = sum(dataframe['Away_Score'][dataframe.Away_Team.str.contains(team)])
+#         tobarchart['Score_home'].append(total_homepoints)
+#         tobarchart['Score_away'].append(total_awaypoints)
+#         total_homereceived = sum(dataframe['Away_Score'][dataframe.Home_Team.str.contains(team)])
+#         total_awayreceived = sum(dataframe['Home_Score'][dataframe.Away_Team.str.contains(team)])
+#         tobarchart['Recieved_home'].append(total_homereceived)
+#         tobarchart['Recieved_away'].append(total_awayreceived)
+#         topie[team] = [[total_homepoints,total_awaypoints],[total_homereceived,total_awayreceived]]
+#     return topie,tobarchart
 
 st.set_page_config(page_title="Findings", page_icon=':mag_right:',layout='wide')
 df = pd.read_csv('pages/Data/BAFA_2019_complete.csv',index_col=False)
